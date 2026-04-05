@@ -3,13 +3,80 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: dark;
+    --body-bg: #000000;
+    --body-text: #e5e5e5;
+    --surface: rgba(255, 255, 255, 0.05);
+    --surface-strong: rgba(255, 255, 255, 0.08);
+    --muted: #9ca3af;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --selection-bg: #ffffff;
+    --selection-text: #000000;
+  }
+
+  html[data-theme='light'] {
+    color-scheme: light;
+    --body-bg: #f8fafc;
+    --body-text: #0f172a;
+    --surface: rgba(15, 23, 42, 0.06);
+    --surface-strong: rgba(15, 23, 42, 0.12);
+    --muted: #475569;
+    --border-color: rgba(15, 23, 42, 0.08);
+    --selection-bg: #0f172a;
+    --selection-text: #f8fafc;
+  }
+
   body {
-    background-color: #000000;
-    color: #e5e5e5;
+    background-color: var(--body-bg);
+    color: var(--body-text);
     font-family: "Inter", sans-serif;
     letter-spacing: -0.01em;
     overflow-x: hidden;
   }
+
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-text);
+  }
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(6px);
+  transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+html[data-theme='light'] .bg-black,
+html[data-theme='light'] .bg-neutral-950,
+html[data-theme='light'] .bg-black\/90,
+html[data-theme='light'] .bg-black\/80,
+html[data-theme='light'] .bg-black\/70,
+html[data-theme='light'] .bg-black\/60,
+html[data-theme='light'] .bg-black\/50 {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+}
+
+html[data-theme='light'] .text-white,
+html[data-theme='light'] .text-neutral-50,
+html[data-theme='light'] .text-slate-100 {
+  color: #0f172a !important;
+}
+
+html[data-theme='light'] .border-white\/10,
+html[data-theme='light'] .border-white\/20,
+html[data-theme='light'] .border-white\/30,
+html[data-theme='light'] .border-white\/40,
+html[data-theme='light'] .border-white\/50 {
+  border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
 /* Technical Grid */
@@ -67,7 +134,7 @@ body::before {
   background: url("https://grainy-gradients.vercel.app/noise.svg");
   opacity: 0.04;
   pointer-events: none;
-  z-index: 100;
+  z-index: 40;
   mix-blend-mode: overlay;
 }
 

@@ -32,13 +32,33 @@ export function ScrambleText({ text, className }) {
     return () => clearInterval(intervalRef.current);
   }, []);
 
+  const handleFocus = () => {
+    startScramble();
+  };
+
+  const handleBlur = () => {
+    stopScramble();
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      startScramble();
+    }
+  };
+
   return (
-    <span
+    <button
+      type="button"
       className={className}
       onMouseEnter={startScramble}
       onMouseLeave={stopScramble}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
+      onClick={startScramble}
     >
       {displayText}
-    </span>
+    </button>
   );
 }
